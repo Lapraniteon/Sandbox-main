@@ -29,6 +29,8 @@ public class CollisionAttributeHandler : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
+        BroadcastMessage("ParentOnCollisionEnter", SendMessageOptions.DontRequireReceiver);
+        
         if (other.gameObject.CompareTag("DontApply"))
             return;
         
@@ -66,13 +68,17 @@ public class CollisionAttributeHandler : MonoBehaviour
         {
             AddAttribute(attDict[ObjAttribute.Bouncy]);
         }
+        
+        if (otherAttributes.Any(item => item is ScreamBehaviour))
+        {
+            AddAttribute(attDict[ObjAttribute.Screaming]);
+        }
     }
 
     private bool AddAttribute(AttributeBehaviour attribute)
     {
         if (attachedBehaviours.All(item => item.GetType() != attribute.GetType())) // If object doesnt already have this attribute
         {
-            //var newAttribute = (AttributeBehaviour)gameObject.AddComponent(attribute.GetType());
             AttributeBehaviour newAttribute = Instantiate(attribute, transform.position, transform.rotation, transform);
             newAttribute.Initialize(gameObject);
             attachedBehaviours.Add(newAttribute);

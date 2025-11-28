@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0bf43df4636b14abe477956d6d96b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BouncyBehaviour
+  bounceMaterial: {fileID: 13400000, guid: fd5f6739f5749cc409942b4375c5498a, type: 2}
+  startImpulse: {x: 0, y: 10, z: 0}

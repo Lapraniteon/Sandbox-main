@@ -7,6 +7,7 @@ public static class Attributes
     {
         Flammable,
         OnFire,
-        Bouncy
+        Bouncy,
+        Screaming
     }
 }
