@@ -29,7 +29,7 @@ public class CollisionAttributeHandler : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        BroadcastMessage("ParentOnCollisionEnter", SendMessageOptions.DontRequireReceiver);
+        BroadcastMessage("ParentOnCollisionEnter", other, SendMessageOptions.DontRequireReceiver);
         
         if (other.gameObject.CompareTag("DontApply"))
             return;
@@ -75,12 +75,32 @@ public class CollisionAttributeHandler : MonoBehaviour
         }
     }
 
-    private bool AddAttribute(AttributeBehaviour attribute)
+    public void MakeSticky()
+    {
+        AddAttribute(attDict[ObjAttribute.Sticky], false);
+    }
+
+    public bool AddAttribute(AttributeBehaviour attribute, bool propagate = true)
     {
         if (attachedBehaviours.All(item => item.GetType() != attribute.GetType())) // If object doesnt already have this attribute
         {
             AttributeBehaviour newAttribute = Instantiate(attribute, transform.position, transform.rotation, transform);
             newAttribute.Initialize(gameObject);
+            
+            // Apply behaviour to all welded components.
+            if (propagate)
+            {
+                HashSet<Weldable> connectedWeldables = GetComponent<Weldable>()?.GetAllConnectedRecursive();
+                if (connectedWeldables != null)
+                {
+                    foreach (Weldable connectedWeldable in connectedWeldables)
+                    {
+                        CollisionAttributeHandler handler = connectedWeldable.GetComponent<CollisionAttributeHandler>();
+                        handler.AddAttribute(attribute, false);
+                    }
+                }
+            }
+                
             attachedBehaviours.Add(newAttribute);
             
             return true; // Attribute succesfully added

@@ -14,6 +14,8 @@ public class CustomFixedJoint : MonoBehaviour
 
     public WeldType weldType = WeldType.Undefined;
 
+    private Transform lastStart;
+
     public enum WeldType
     {
         Undefined,
@@ -40,8 +42,8 @@ public class CustomFixedJoint : MonoBehaviour
             Rigidbody targetRigidbody = targetTransform.GetComponent<Rigidbody>();
             if (targetRigidbody)
             {
-                fixedJoint = gameObject.AddComponent<FixedJoint>();
-                fixedJoint.connectedBody = targetRigidbody;
+                //fixedJoint = gameObject.AddComponent<FixedJoint>();
+                //fixedJoint.connectedBody = targetRigidbody;
                 weldType = WeldType.PhysicsBased;
             }
             else

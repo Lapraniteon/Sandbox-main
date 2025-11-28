@@ -726,6 +726,7 @@ GameObject:
   - component: {fileID: 137800168}
   - component: {fileID: 137800167}
   - component: {fileID: 137800165}
+  - component: {fileID: 137800174}
   m_Layer: 0
   m_Name: FireTrigger
   m_TagString: Untagged
@@ -867,6 +868,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &137800174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137800164}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79831ae605ed54f628ebbbb6ccaa3591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weldable
 --- !u!1001 &196520827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3487,6 +3500,10 @@ PrefabInstance:
       propertyPath: weldingType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5251035550843937366, guid: fd2486027d9f1403dbc13912326d3e13, type: 3}
+      propertyPath: WeldProximityThreshold
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7801057382709454501, guid: fd2486027d9f1403dbc13912326d3e13, type: 3}
       propertyPath: useGrid
       value: 0
@@ -3659,6 +3676,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4321472da242e4b1e8ad1658c497e601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1703674825 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5251035550843937366, guid: fd2486027d9f1403dbc13912326d3e13, type: 3}
+  m_PrefabInstance: {fileID: 1663528229}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c650326713bd437fb484b92a493c56d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1709179973
@@ -4233,6 +4261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   attributeBehaviourDictionary: {fileID: 11400000, guid: e545a2177570c0d4d9bb7b74211c4190, type: 2}
+  welder: {fileID: 1703674825}
 --- !u!4 &2074644798
 Transform:
   m_ObjectHideFlags: 0
@@ -4406,7 +4435,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9dc05de0d240548b6a1b43edc0245650, type: 2}
     - target: {fileID: 5303190906105007012, guid: eacb27de9e926644898cf028dcc56872, type: 3}
       propertyPath: startAttributes.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5303190906105007012, guid: eacb27de9e926644898cf028dcc56872, type: 3}
       propertyPath: attachedBehaviours.Array.size
@@ -4414,7 +4443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5303190906105007012, guid: eacb27de9e926644898cf028dcc56872, type: 3}
       propertyPath: 'startAttributes.Array.data[1]'
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5528547879456891613, guid: eacb27de9e926644898cf028dcc56872, type: 3}
       propertyPath: m_LocalPosition.x

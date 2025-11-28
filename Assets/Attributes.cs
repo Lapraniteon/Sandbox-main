@@ -8,6 +8,7 @@ public static class Attributes
         Flammable,
         OnFire,
         Bouncy,
-        Screaming
+        Screaming,
+        Sticky
     }
 }

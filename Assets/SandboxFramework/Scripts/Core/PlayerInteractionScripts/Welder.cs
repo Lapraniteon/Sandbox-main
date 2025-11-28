@@ -203,6 +203,9 @@ public class Welder : MonoBehaviour
             {
                 weldQueue.Enqueue(current);
                 current.WeldTo(overlappingWeldable, weldingType, false, overlapTransform);
+                
+                overlappingWeldable.GetComponent<CollisionAttributeHandler>().MakeSticky();
+                
                 weldQueue.Enqueue(overlappingWeldable);
                 visited.Add(overlappingWeldable);
                 weldCount++;

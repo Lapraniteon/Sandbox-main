@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 
     public AttributeDictionary attributeBehaviourDictionary;
 
+    public Welder welder;
+
     private void Awake()
     {
         // If an instance already exists and it's not this one → destroy this
