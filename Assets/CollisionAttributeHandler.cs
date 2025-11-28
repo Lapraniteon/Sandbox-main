@@ -76,18 +76,28 @@ public class CollisionAttributeHandler : MonoBehaviour
             AttributeBehaviour newAttribute = Instantiate(attribute, transform.position, transform.rotation, transform);
             newAttribute.Initialize(gameObject);
             attachedBehaviours.Add(newAttribute);
+            
             return true; // Attribute succesfully added
         }
 
         return false; // Attribute already existed
     }
 
-    /*private void RemoveAttribute(ObjAttribute attribute)
+    private bool RemoveAttribute(AttributeBehaviour attribute)
     {
-        if (selfAttributes.attributes.Contains(attribute))
+        if (attachedBehaviours.Count == 0)
+            return false;
+        
+        var existingAttribute = attachedBehaviours
+            .FirstOrDefault(item => item.GetType() == attribute.GetType());
+
+        if (existingAttribute != null)
         {
-            selfAttributes.attributes.Remove(attribute);
-            
+            existingAttribute.Kill();
+            attachedBehaviours.Remove(existingAttribute);
+            return true; // Attribute succesfully removed
         }
-    }*/
+
+        return false; // Attribute didn't exist
+    }
 }

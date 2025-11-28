@@ -10,6 +10,6 @@ public abstract class AttributeBehaviour : MonoBehaviour
 
     public virtual void Kill()
     {
-        
+        Destroy(gameObject);
     }
 }
