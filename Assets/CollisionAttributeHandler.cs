@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.Splines;
+using static Attributes;
+
+public class CollisionAttributeHandler : MonoBehaviour
+{
+
+    private ParticleSystem fireParticles;
+
+    public List<ObjAttribute> startAttributes = new (); // Attributes to initialize the object with
+    public List<AttributeBehaviour> attachedBehaviours;
+
+    private Dictionary<ObjAttribute, AttributeBehaviour> attDict;
+
+    private void Start()
+    {
+        //selfAttributes = GetComponent<ObjAttributes>();
+
+        attDict = GameManager.Instance.attributeBehaviourDictionary.GetDictionary();
+
+        foreach (ObjAttribute attrib in startAttributes)
+        {
+            AddAttribute(attDict[attrib]);
+        }
+    }
+    
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("DontApply"))
+            return;
+        
+        // Should all be things that it applies to ITSELF
+
+        List<AttributeBehaviour> otherAttributes = other.gameObject.GetComponent<CollisionAttributeHandler>()?.attachedBehaviours;
+
+        if (otherAttributes != null)
+            HandleAttributes(otherAttributes);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("DontApply"))
+            return;
+        
+        // Should all be things that it applies to ITSELF
+
+        List<AttributeBehaviour> otherAttributes = other.gameObject.GetComponent<CollisionAttributeHandler>()?.attachedBehaviours;
+        
+        if (otherAttributes != null)
+            HandleAttributes(otherAttributes);
+    }
+
+    private void HandleAttributes(List<AttributeBehaviour> otherAttributes)
+    {
+        Debug.Log("Handling attributes");
+        
+        if (otherAttributes.Any(item => item is FireBehaviour) && attachedBehaviours.Any(item => item is FlammableBehaviour))
+        {
+            AddAttribute(attDict[ObjAttribute.OnFire]);
+        }
+
+        if (otherAttributes.Any(item => item is BouncyBehaviour))
+        {
+            AddAttribute(attDict[ObjAttribute.Bouncy]);
+        }
+    }
+
+    private bool AddAttribute(AttributeBehaviour attribute)
+    {
+        if (attachedBehaviours.All(item => item.GetType() != attribute.GetType())) // If object doesnt already have this attribute
+        {
+            //var newAttribute = (AttributeBehaviour)gameObject.AddComponent(attribute.GetType());
+            AttributeBehaviour newAttribute = Instantiate(attribute, transform.position, transform.rotation, transform);
+            newAttribute.Initialize(gameObject);
+            attachedBehaviours.Add(newAttribute);
+            return true; // Attribute succesfully added
+        }
+
+        return false; // Attribute already existed
+    }
+
+    /*private void RemoveAttribute(ObjAttribute attribute)
+    {
+        if (selfAttributes.attributes.Contains(attribute))
+        {
+            selfAttributes.attributes.Remove(attribute);
+            
+        }
+    }*/
+}
