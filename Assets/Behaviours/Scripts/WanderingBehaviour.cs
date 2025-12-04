@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class WanderingBehaviour : AttributeBehaviour
 {
@@ -17,7 +18,11 @@ public class WanderingBehaviour : AttributeBehaviour
     {
         base.Initialize(parentObj);
         parent = parentObj;
+        
+        Vector3 parentPos = parent.transform.position;
         agent = parent.AddComponent<NavMeshAgent>();
+        agent.baseOffset = parentPos.y;
+        
         wanderCoroutine = StartCoroutine(Wander());
     }
 
