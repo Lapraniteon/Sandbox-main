@@ -2355,6 +2355,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eacb27de9e926644898cf028dcc56872, type: 3}
+--- !u!1 &981614407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 981614410}
+  - component: {fileID: 981614408}
+  m_Layer: 0
+  m_Name: PlayerObjectSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &981614408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981614407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc86cf32c483d547b5da32b0a33dad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  maxRayDistance: 8
+  prefabToSpawn: {fileID: 5303190906105007012, guid: eacb27de9e926644898cf028dcc56872, type: 3}
+--- !u!4 &981614410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981614407}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &982664037
 GameObject:
   m_ObjectHideFlags: 0
@@ -4771,7 +4817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2397410237344900951, guid: ae3ac1e3101b8944d9aaf24738e41f2d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.82
+      value: -5.82
       objectReference: {fileID: 0}
     - target: {fileID: 2397410237344900951, guid: ae3ac1e3101b8944d9aaf24738e41f2d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4912,6 +4958,7 @@ SceneRoots:
   - {fileID: 1073089996}
   - {fileID: 982664038}
   - {fileID: 710325476}
+  - {fileID: 981614410}
   - {fileID: 1663528229}
   - {fileID: 137800173}
   - {fileID: 4976210412663246198}

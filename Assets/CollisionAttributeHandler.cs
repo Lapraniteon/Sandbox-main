@@ -8,8 +8,6 @@ using static Attributes;
 public class CollisionAttributeHandler : MonoBehaviour
 {
 
-    private ParticleSystem fireParticles;
-
     public List<ObjAttribute> startAttributes = new (); // Attributes to initialize the object with
     public List<AttributeBehaviour> attachedBehaviours;
 
@@ -17,10 +15,13 @@ public class CollisionAttributeHandler : MonoBehaviour
 
     private void Start()
     {
-        //selfAttributes = GetComponent<ObjAttributes>();
+        InitializeStartAttributes();
+    }
 
+    public void InitializeStartAttributes()
+    {
         attDict = GameManager.Instance.attributeBehaviourDictionary.GetDictionary();
-
+        
         foreach (ObjAttribute attrib in startAttributes)
         {
             AddAttribute(attDict[attrib]);

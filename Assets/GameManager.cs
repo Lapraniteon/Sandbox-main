@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
 
     public Welder welder;
 
+    public bool SpawnMode;
+    [SerializeField] private GameObject spawnModeUI;
+
     private void Awake()
     {
         // If an instance already exists and it's not this one → destroy this
@@ -36,5 +39,11 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("Game Started");
+    }
+
+    public void ToggleSpawnMode()
+    {
+        SpawnMode = !SpawnMode;
+        spawnModeUI.SetActive(SpawnMode);
     }
 }
