@@ -9,6 +9,7 @@ public static class Attributes
         OnFire,
         Bouncy,
         Screaming,
-        Sticky
+        Sticky,
+        Wandering
     }
 }

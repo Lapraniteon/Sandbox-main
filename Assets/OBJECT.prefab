@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8212661936963671322}
   - component: {fileID: 697280983701982680}
   - component: {fileID: 5303190906105007012}
+  - component: {fileID: -352854472269593671}
   m_Layer: 0
   m_Name: OBJECT
   m_TagString: Untagged
@@ -197,3 +198,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   startAttributes: 
   attachedBehaviours: []
+--- !u!114 &-352854472269593671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8639560709772092713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
