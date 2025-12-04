@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b180e39047ec0947ad9880c0b08f2a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScreamBehaviour
+  _attribute: 3
   _screamAudio: {fileID: 3900103063945929566}
   _screamClip: {fileID: 8300000, guid: 1f98a3e59232a8e4985827a91bcb3716, type: 3}
 --- !u!82 &3900103063945929566

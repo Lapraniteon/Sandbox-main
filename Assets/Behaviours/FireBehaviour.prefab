@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893200f80e02c0543b3f19244a47d1bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireBehaviour
+  _attribute: 1
 --- !u!1001 &4396927075337682001
 PrefabInstance:
   m_ObjectHideFlags: 0

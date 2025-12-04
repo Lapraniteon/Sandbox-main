@@ -126,4 +126,16 @@ public class CollisionAttributeHandler : MonoBehaviour
 
         return false; // Attribute didn't exist
     }
+
+    public string GetAttributesAsString()
+    {
+        string attributes = "";
+
+        foreach (AttributeBehaviour attrib in attachedBehaviours)
+        {
+            attributes += attrib.Attribute.ToString() + Environment.NewLine;
+        }
+
+        return attributes;
+    }
 }

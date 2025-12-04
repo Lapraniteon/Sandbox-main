@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e85edd8aa97133498bd404077e8e36c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WanderingBehaviour
+  _attribute: 5
   targetInterval: 1.5
   targetRadius: 8

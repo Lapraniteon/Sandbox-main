@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45ea9564d1e6fe4dbf79c0f54e665f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StickyBehaviour
+  _attribute: 4

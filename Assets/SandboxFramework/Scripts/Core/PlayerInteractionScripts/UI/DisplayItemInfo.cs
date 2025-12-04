@@ -48,11 +48,13 @@ public class DisplayItemInfo : MonoBehaviour
             string name = item.name;
             string description = item.GetComponent<Selectable>()?.ObjectDescription ?? string.Empty;
 
+            string attributes = item.GetComponent<CollisionAttributeHandler>().GetAttributesAsString();
+
             itemName.enabled = true;
             itemDescription.enabled = true;
 
             itemName.SetText(name);
-            itemDescription.SetText(description);
+            itemDescription.SetText($"{description}\n{attributes}");
         }
         else
         {
