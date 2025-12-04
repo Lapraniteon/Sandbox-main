@@ -19,9 +19,8 @@ public class WanderingBehaviour : AttributeBehaviour
         base.Initialize(parentObj);
         parent = parentObj;
         
-        Vector3 parentPos = parent.transform.position;
         agent = parent.AddComponent<NavMeshAgent>();
-        agent.baseOffset = parentPos.y;
+        agent.updateUpAxis = true;
         
         wanderCoroutine = StartCoroutine(Wander());
     }
