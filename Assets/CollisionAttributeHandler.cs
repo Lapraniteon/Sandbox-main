@@ -37,10 +37,10 @@ public class CollisionAttributeHandler : MonoBehaviour
         
         // Should all be things that it applies to ITSELF
 
-        List<AttributeBehaviour> otherAttributes = other.gameObject.GetComponent<CollisionAttributeHandler>()?.attachedBehaviours;
+        CollisionAttributeHandler otherAttributeHandler = other.gameObject.GetComponent<CollisionAttributeHandler>();
 
-        if (otherAttributes != null)
-            HandleAttributes(otherAttributes);
+        if (otherAttributeHandler != null)
+            HandleAttributes(otherAttributeHandler);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,17 +50,18 @@ public class CollisionAttributeHandler : MonoBehaviour
         
         // Should all be things that it applies to ITSELF
 
-        List<AttributeBehaviour> otherAttributes = other.gameObject.GetComponent<CollisionAttributeHandler>()?.attachedBehaviours;
+        CollisionAttributeHandler otherAttributeHandler = other.gameObject.GetComponent<CollisionAttributeHandler>();
         
-        if (otherAttributes != null)
-            HandleAttributes(otherAttributes);
+        if (otherAttributeHandler != null)
+            HandleAttributes(otherAttributeHandler);
     }
 
-    private void HandleAttributes(List<AttributeBehaviour> otherAttributes)
+    private void HandleAttributes(CollisionAttributeHandler otherAttributeHandler)
     {
-        Debug.Log("Handling attributes");
+        List<AttributeBehaviour> otherAttributes = otherAttributeHandler.attachedBehaviours;
         
-        if (otherAttributes.Any(item => item is FireBehaviour) && attachedBehaviours.Any(item => item is FlammableBehaviour))
+        if (otherAttributes.Any(item => item is FireBehaviour) && 
+            attachedBehaviours.Any(item => item is FlammableBehaviour))
         {
             AddAttribute(attDict[ObjAttribute.OnFire]);
         }
@@ -73,6 +74,18 @@ public class CollisionAttributeHandler : MonoBehaviour
         if (otherAttributes.Any(item => item is ScreamBehaviour))
         {
             AddAttribute(attDict[ObjAttribute.Screaming]);
+        }
+        
+        if (otherAttributes.Any(item => item is WetBehaviour))
+        {
+            if (RemoveAttribute(attDict[ObjAttribute.OnFire]))
+                otherAttributeHandler.RemoveAttribute(attDict[ObjAttribute.Wet]);
+        }
+
+        if (otherAttributes.Any(item => item is FireBehaviour) &&
+            attachedBehaviours.Any(item => item is ExplosiveBehaviour))
+        {
+            RemoveAttribute(attDict[ObjAttribute.Explosive]);
         }
     }
 
@@ -126,6 +139,16 @@ public class CollisionAttributeHandler : MonoBehaviour
         }
 
         return false; // Attribute didn't exist
+    }
+
+    public void PropagateExplosion()
+    {
+        Invoke(nameof(PropagateExplosionDelay), 0.02f);
+    }
+
+    private void PropagateExplosionDelay()
+    {
+        RemoveAttribute(attDict[ObjAttribute.Explosive]);
     }
 
     public string GetAttributesAsString()

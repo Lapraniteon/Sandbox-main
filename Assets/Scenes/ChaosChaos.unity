@@ -2435,7 +2435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 24.67
       objectReference: {fileID: 0}
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2443,7 +2443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 27.23
       objectReference: {fileID: 0}
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2841,7 +2841,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 75
+    m_Top: 90
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 0
@@ -4982,6 +4982,18 @@ PrefabInstance:
     - target: {fileID: 4251367117706408786, guid: ae3ac1e3101b8944d9aaf24738e41f2d, type: 3}
       propertyPath: m_Name
       value: Pine Tree (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338905310075756107, guid: ae3ac1e3101b8944d9aaf24738e41f2d, type: 3}
+      propertyPath: startAttributes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338905310075756107, guid: ae3ac1e3101b8944d9aaf24738e41f2d, type: 3}
+      propertyPath: 'startAttributes.Array.data[1]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338905310075756107, guid: ae3ac1e3101b8944d9aaf24738e41f2d, type: 3}
+      propertyPath: 'startAttributes.Array.data[2]'
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

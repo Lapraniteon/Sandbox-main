@@ -10,6 +10,8 @@ public static class Attributes
         Bouncy,
         Screaming,
         Sticky,
-        Wandering
+        Wandering,
+        Wet,
+        Explosive
     }
 }
