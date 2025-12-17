@@ -7,6 +7,7 @@ TagManager:
   - CinemachineTarget
   - Weldable
   - DontApply
+  - PlantSurface
   layers:
   - Default
   - TransparentFX

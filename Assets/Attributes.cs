@@ -12,6 +12,7 @@ public static class Attributes
         Sticky,
         Wandering,
         Wet,
-        Explosive
+        Explosive,
+        Planting
     }
 }

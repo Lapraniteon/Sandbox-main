@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -15,9 +16,12 @@ public class GameManager : MonoBehaviour
 
     private int chaosScore;
     public int ChaosScore => chaosScore;
+    private int displayedChaosScore;
     private int interactionAmount;
     public int InteractionAmount => interactionAmount;
+    private int displayedInteractionAmount;
 
+    [SerializeField] private RectTransform chaosUIPanel;
     [SerializeField] private TextMeshProUGUI chaosScoreText;
     [SerializeField] private TextMeshProUGUI interactionAmountText;
 
@@ -50,6 +54,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Started");
     }
 
+    private void Start()
+    {
+        chaosUIPanel.DOScale(1.2f, 0.5f)
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetEase(Ease.InOutSine);
+    }
+
     public void ToggleSpawnMode()
     {
         SpawnMode = !SpawnMode;
@@ -61,6 +72,16 @@ public class GameManager : MonoBehaviour
         interactionAmount++;
         chaosScore += score;
         interactionAmountText.text = $"{interactionAmount} interactions";
-        chaosScoreText.text = chaosScore.ToString();
+        
+        DOTween.To(
+            () => displayedChaosScore,
+            x =>
+            {
+                displayedChaosScore = x;
+                chaosScoreText.text = displayedChaosScore.ToString();
+            },
+            chaosScore,
+            0.5f
+        );
     }
 }
