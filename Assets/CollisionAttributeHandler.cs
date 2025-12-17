@@ -32,6 +32,8 @@ public class CollisionAttributeHandler : MonoBehaviour
     {
         BroadcastMessage("ParentOnCollisionEnter", other, SendMessageOptions.DontRequireReceiver);
         
+        GameManager.Instance.RegisterInteraction(10);
+        
         if (other.gameObject.CompareTag("DontApply"))
             return;
         
@@ -64,28 +66,33 @@ public class CollisionAttributeHandler : MonoBehaviour
             attachedBehaviours.Any(item => item is FlammableBehaviour))
         {
             AddAttribute(attDict[ObjAttribute.OnFire]);
+            GameManager.Instance.RegisterInteraction(500);
         }
 
         if (otherAttributes.Any(item => item is BouncyBehaviour))
         {
             AddAttribute(attDict[ObjAttribute.Bouncy]);
+            GameManager.Instance.RegisterInteraction(200);
         }
         
         if (otherAttributes.Any(item => item is ScreamBehaviour))
         {
             AddAttribute(attDict[ObjAttribute.Screaming]);
+            GameManager.Instance.RegisterInteraction(100);
         }
         
         if (otherAttributes.Any(item => item is WetBehaviour))
         {
             if (RemoveAttribute(attDict[ObjAttribute.OnFire]))
                 otherAttributeHandler.RemoveAttribute(attDict[ObjAttribute.Wet]);
+            GameManager.Instance.RegisterInteraction(200);
         }
 
         if (otherAttributes.Any(item => item is FireBehaviour) &&
             attachedBehaviours.Any(item => item is ExplosiveBehaviour))
         {
             RemoveAttribute(attDict[ObjAttribute.Explosive]);
+            GameManager.Instance.RegisterInteraction(1000);
         }
     }
 
@@ -148,6 +155,7 @@ public class CollisionAttributeHandler : MonoBehaviour
 
     private void PropagateExplosionDelay()
     {
+        GameManager.Instance.RegisterInteraction(1000);
         RemoveAttribute(attDict[ObjAttribute.Explosive]);
     }
 

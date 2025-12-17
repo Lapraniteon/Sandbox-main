@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -11,6 +12,14 @@ public class GameManager : MonoBehaviour
 
     public bool SpawnMode;
     [SerializeField] private GameObject spawnModeUI;
+
+    private int chaosScore;
+    public int ChaosScore => chaosScore;
+    private int interactionAmount;
+    public int InteractionAmount => interactionAmount;
+
+    [SerializeField] private TextMeshProUGUI chaosScoreText;
+    [SerializeField] private TextMeshProUGUI interactionAmountText;
 
     private void Awake()
     {
@@ -45,5 +54,13 @@ public class GameManager : MonoBehaviour
     {
         SpawnMode = !SpawnMode;
         spawnModeUI.SetActive(SpawnMode);
+    }
+
+    public void RegisterInteraction(int score)
+    {
+        interactionAmount++;
+        chaosScore += score;
+        interactionAmountText.text = $"{interactionAmount} interactions";
+        chaosScoreText.text = chaosScore.ToString();
     }
 }
