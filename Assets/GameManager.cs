@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI chaosScoreText;
     [SerializeField] private TextMeshProUGUI interactionAmountText;
 
+    [Header("Timer")] 
+    [SerializeField] private float gameTimer;
+    [SerializeField] private TextMeshProUGUI timerText;
+
+    private bool runTimer;
+
     private void Awake()
     {
         // If an instance already exists and it's not this one → destroy this
@@ -59,6 +65,14 @@ public class GameManager : MonoBehaviour
         chaosUIPanel.DOScale(1.2f, 0.5f)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutSine);
+        
+        SetTimerState(true);
+    }
+
+    private void Update()
+    {
+        gameTimer += Time.deltaTime;
+        PresentTimer(gameTimer);
     }
 
     public void ToggleSpawnMode()
@@ -84,4 +98,12 @@ public class GameManager : MonoBehaviour
             0.5f
         );
     }
+    
+    public void SetTimerState(bool state) => runTimer = state;
+
+    public void PresentTimer(float time)
+    {
+        timerText.text = $"{time.ToString("0.00")}";
+    }
+    
 }
