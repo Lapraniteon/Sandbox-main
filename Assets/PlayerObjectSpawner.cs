@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerObjectSpawner : MonoBehaviour
@@ -6,7 +7,9 @@ public class PlayerObjectSpawner : MonoBehaviour
 
     [SerializeField] private float maxRayDistance;
 
-    [SerializeField] private CollisionAttributeHandler prefabToSpawn;
+    [SerializeField] private SpawnableObject[] spawnableObjects;
+    [SerializeField] private int selectedSpawnableObjectIndex;
+    [SerializeField] private TextMeshProUGUI currentSpawnableObjectText;
 
     [SerializeField] private List<Attributes.ObjAttribute> selectedAttributes = new();
 
@@ -24,13 +27,22 @@ public class PlayerObjectSpawner : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
             GameManager.Instance.ToggleSpawnMode();
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            selectedSpawnableObjectIndex++;
+            if (selectedSpawnableObjectIndex >= spawnableObjects.Length) 
+                selectedSpawnableObjectIndex = 0;
+            
+            currentSpawnableObjectText.text = spawnableObjects[selectedSpawnableObjectIndex].name;
+        }
         
         if (Input.GetMouseButtonDown(1) && GameManager.Instance.SpawnMode)
         {
             Ray ray = Camera.main.ScreenPointToRay(InputSystem.GetPointerPosition());
             if (Physics.Raycast(ray, out RaycastHit hitInfo, maxRayDistance, excludePlayerMask))
             {
-                CollisionAttributeHandler obj = Instantiate(prefabToSpawn, hitInfo.point, Quaternion.identity);
+                CollisionAttributeHandler obj = Instantiate(spawnableObjects[selectedSpawnableObjectIndex].prefab, hitInfo.point, Quaternion.identity);
                 obj.startAttributes = selectedAttributes;
                 obj.InitializeStartAttributes();
             }
@@ -49,4 +61,11 @@ public class PlayerObjectSpawner : MonoBehaviour
         if (selectedAttributes.Contains(attribute))
             selectedAttributes.Remove(attribute);
     }
+}
+
+[System.Serializable]
+public class SpawnableObject
+{
+    public string name;
+    public CollisionAttributeHandler prefab;
 }
