@@ -81,9 +81,9 @@ public class GameManager : MonoBehaviour
         spawnModeUI.SetActive(SpawnMode);
     }
 
-    public void RegisterInteraction(int score)
+    public void RegisterInteraction(int score, bool award)
     {
-        if (gameTimer < 2f)
+        if (gameTimer < 2f || !award)
             return;
         
         interactionAmount++;

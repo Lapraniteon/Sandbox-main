@@ -16,6 +16,7 @@ public class CollisionAttributeHandler : MonoBehaviour
     private bool canAwardCollisionScore = true;
 
     [SerializeField] private bool canLoseAttributes = true;
+    [SerializeField] private bool canAwardScore = true;
 
     private void Start()
     {
@@ -39,7 +40,7 @@ public class CollisionAttributeHandler : MonoBehaviour
         if (canAwardCollisionScore)
         {
             canAwardCollisionScore = false;
-            GameManager.Instance.RegisterInteraction(5);
+            GameManager.Instance.RegisterInteraction(5, canAwardScore);
             Invoke(nameof(ResetCanAwardCollisionScore), 0.5f);
         }
         
@@ -75,26 +76,26 @@ public class CollisionAttributeHandler : MonoBehaviour
             attachedBehaviours.Any(item => item is FlammableBehaviour))
         {
             AddAttribute(attDict[ObjAttribute.OnFire]);
-            GameManager.Instance.RegisterInteraction(500);
+            GameManager.Instance.RegisterInteraction(500, canAwardScore);
         }
 
         if (otherAttributes.Any(item => item is BouncyBehaviour))
         {
             AddAttribute(attDict[ObjAttribute.Bouncy]);
-            GameManager.Instance.RegisterInteraction(200);
+            GameManager.Instance.RegisterInteraction(200, canAwardScore);
         }
         
         if (otherAttributes.Any(item => item is ScreamBehaviour))
         {
             AddAttribute(attDict[ObjAttribute.Screaming]);
-            GameManager.Instance.RegisterInteraction(100);
+            GameManager.Instance.RegisterInteraction(100, canAwardScore);
         }
         
         if (otherAttributes.Any(item => item is WetBehaviour))
         {
             if (RemoveAttribute(attDict[ObjAttribute.OnFire]))
                 otherAttributeHandler.RemoveAttribute(attDict[ObjAttribute.Wet]);
-            GameManager.Instance.RegisterInteraction(200);
+            GameManager.Instance.RegisterInteraction(200, canAwardScore);
         }
 
         if (otherAttributes.Any(item => item is FireBehaviour) &&
@@ -102,7 +103,7 @@ public class CollisionAttributeHandler : MonoBehaviour
         {
             RemoveAttribute(attDict[ObjAttribute.Explosive]);
             AddAttribute(attDict[ObjAttribute.OnFire]);
-            GameManager.Instance.RegisterInteraction(1000);
+            GameManager.Instance.RegisterInteraction(500, canAwardScore);
         }
     }
 
@@ -168,7 +169,7 @@ public class CollisionAttributeHandler : MonoBehaviour
 
     private void PropagateExplosionDelay()
     {
-        GameManager.Instance.RegisterInteraction(1000);
+        GameManager.Instance.RegisterInteraction(500, canAwardScore);
         RemoveAttribute(attDict[ObjAttribute.Explosive]);
         AddAttribute(attDict[ObjAttribute.OnFire]);
     }
