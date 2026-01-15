@@ -1,6 +1,7 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -73,6 +74,9 @@ public class GameManager : MonoBehaviour
     {
         gameTimer += Time.deltaTime;
         PresentTimer(gameTimer);
+        
+        if (Input.GetKeyDown(KeyCode.Delete))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ToggleSpawnMode()
