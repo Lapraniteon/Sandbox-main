@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireBehaviour
   _attribute: 1
+  burnTime: 30
 --- !u!1001 &4396927075337682001
 PrefabInstance:
   m_ObjectHideFlags: 0

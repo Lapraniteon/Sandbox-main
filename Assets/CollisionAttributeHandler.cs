@@ -13,6 +13,10 @@ public class CollisionAttributeHandler : MonoBehaviour
 
     private Dictionary<ObjAttribute, AttributeBehaviour> attDict;
 
+    private bool canAwardCollisionScore = true;
+
+    [SerializeField] private bool canLoseAttributes = true;
+
     private void Start()
     {
         InitializeStartAttributes();
@@ -31,8 +35,13 @@ public class CollisionAttributeHandler : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         BroadcastMessage("ParentOnCollisionEnter", other, SendMessageOptions.DontRequireReceiver);
-        
-        GameManager.Instance.RegisterInteraction(10);
+
+        if (canAwardCollisionScore)
+        {
+            canAwardCollisionScore = false;
+            GameManager.Instance.RegisterInteraction(5);
+            Invoke(nameof(ResetCanAwardCollisionScore), 0.5f);
+        }
         
         if (other.gameObject.CompareTag("DontApply"))
             return;
@@ -92,6 +101,7 @@ public class CollisionAttributeHandler : MonoBehaviour
             attachedBehaviours.Any(item => item is ExplosiveBehaviour))
         {
             RemoveAttribute(attDict[ObjAttribute.Explosive]);
+            AddAttribute(attDict[ObjAttribute.OnFire]);
             GameManager.Instance.RegisterInteraction(1000);
         }
     }
@@ -134,6 +144,9 @@ public class CollisionAttributeHandler : MonoBehaviour
     {
         if (attachedBehaviours.Count == 0)
             return false;
+
+        if (!canLoseAttributes)
+            return false;
         
         var existingAttribute = attachedBehaviours
             .FirstOrDefault(item => item.GetType() == attribute.GetType());
@@ -157,6 +170,7 @@ public class CollisionAttributeHandler : MonoBehaviour
     {
         GameManager.Instance.RegisterInteraction(1000);
         RemoveAttribute(attDict[ObjAttribute.Explosive]);
+        AddAttribute(attDict[ObjAttribute.OnFire]);
     }
 
     public string GetAttributesAsString()
@@ -170,4 +184,6 @@ public class CollisionAttributeHandler : MonoBehaviour
 
         return attributes;
     }
+    
+    private void ResetCanAwardCollisionScore() => canAwardCollisionScore = true;
 }

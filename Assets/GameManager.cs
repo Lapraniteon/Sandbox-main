@@ -83,6 +83,9 @@ public class GameManager : MonoBehaviour
 
     public void RegisterInteraction(int score)
     {
+        if (gameTimer < 2f)
+            return;
+        
         interactionAmount++;
         chaosScore += score;
         interactionAmountText.text = $"{interactionAmount} interactions";

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3951530289939389376}
   - component: {fileID: 8212661936963671322}
   - component: {fileID: 697280983701982680}
+  - component: {fileID: -6686070852498665518}
   - component: {fileID: 5303190906105007012}
   - component: {fileID: -352854472269593671}
   m_Layer: 0
@@ -184,6 +185,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79831ae605ed54f628ebbbb6ccaa3591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weldable
+--- !u!114 &-6686070852498665518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8639560709772092713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9c448b32f1ab048b5ed8dde4f9bbc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  lifetime: 120
 --- !u!114 &5303190906105007012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   startAttributes: 
   attachedBehaviours: []
+  canLoseAttributes: 1
 --- !u!114 &-352854472269593671
 MonoBehaviour:
   m_ObjectHideFlags: 0

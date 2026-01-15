@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab867bd2dd34b14f944b554524f0ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlammableBehaviour
+  _attribute: 0
+  burnTime: 30
