@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
         // Assign instance and make persistent
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         // Initialize anything needed for the manager
         Initialize();
@@ -52,6 +52,23 @@ public class GameManager : MonoBehaviour
     private void Initialize()
     {
         // Setup logic here
+        if (PlayerPrefs.GetInt("ResetDuringPlay") != 0)
+        {
+            chaosScore = PlayerPrefs.GetInt("ChaosScore", 0);
+            interactionAmount = PlayerPrefs.GetInt("InteractionAmount", 0);
+            PlayerPrefs.SetInt("ResetDuringPlay", 0);
+            PlayerPrefs.Save();
+            
+            UpdateChaosScoreDisplay();
+        }
+        else
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.SetInt("ChaosScore", 0);
+            PlayerPrefs.SetInt("InteractionAmount", 0);
+            PlayerPrefs.Save();
+        }
+        
         Debug.Log("GameManager initialized!");
     }
 
@@ -74,9 +91,28 @@ public class GameManager : MonoBehaviour
     {
         gameTimer += Time.deltaTime;
         PresentTimer(gameTimer);
-        
+
         if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            PlayerPrefs.SetInt("ChaosScore", chaosScore);
+            PlayerPrefs.SetInt("InteractionAmount", interactionAmount);
+            PlayerPrefs.SetInt("ResetDuringPlay", 1);
+            PlayerPrefs.Save();
+            
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Backslash))
+        {
+            PlayerPrefs.SetInt("ChaosScore", 0);
+            PlayerPrefs.SetInt("InteractionAmount", 0);
+            chaosScore = 0;
+            interactionAmount = 0;
+            PlayerPrefs.Save();
+            
+            UpdateChaosScoreDisplay();
+        }
+            
     }
 
     public void ToggleSpawnMode()
@@ -92,6 +128,12 @@ public class GameManager : MonoBehaviour
         
         interactionAmount++;
         chaosScore += score;
+        
+        UpdateChaosScoreDisplay();
+    }
+
+    private void UpdateChaosScoreDisplay()
+    {
         interactionAmountText.text = $"{interactionAmount} interactions";
         
         DOTween.To(
@@ -102,10 +144,10 @@ public class GameManager : MonoBehaviour
                 chaosScoreText.text = displayedChaosScore.ToString();
             },
             chaosScore,
-            0.5f
+            0.25f
         );
     }
-    
+
     public void SetTimerState(bool state) => runTimer = state;
 
     public void PresentTimer(float time)
