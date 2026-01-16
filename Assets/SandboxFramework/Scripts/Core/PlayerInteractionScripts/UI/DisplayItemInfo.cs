@@ -48,7 +48,7 @@ public class DisplayItemInfo : MonoBehaviour
             string name = item.name;
             string description = item.GetComponent<Selectable>()?.ObjectDescription ?? string.Empty;
 
-            string attributes = item.GetComponent<CollisionAttributeHandler>().GetAttributesAsString();
+            string attributes = item.GetComponent<CollisionAttributeHandler>()?.GetAttributesAsString() ?? string.Empty;
 
             itemName.enabled = true;
             itemDescription.enabled = true;
